@@ -32,15 +32,6 @@ app.use("/url", URLRoutes);
 app.use("/user", userRoute);
 app.use("/", staticRoute);
 
-// app.get("/:shortId", async(req, res) =>{
-//   const shortId = req.params.shortId;
-//   const entry = await URL.findOneAndUpdate(
-//     {shortId},
-//     {$push: {visitHistory: {timestamp: Date.now()}}}
-//   );
-//   res.redirect(entry.redirectURL);
-// });
-
 
 app.get("/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
