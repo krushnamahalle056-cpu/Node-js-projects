@@ -31,7 +31,7 @@ app.get("/test", (req, res)=>{
   return res.end("<h1>Hey for server testing</h1>");
 });
 
-app.use("/url", URLRoutes);
+app.use("/url", restrictToLoggedIn, URLRoutes);
 app.use("/user", userRoute);
 app.use("/", staticRoute);
 
