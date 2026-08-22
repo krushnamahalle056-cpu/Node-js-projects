@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 const { connnectToMongoDB } = require("./connect");
 
 const URL = require("./models/url");
