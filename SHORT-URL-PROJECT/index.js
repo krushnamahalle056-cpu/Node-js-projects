@@ -24,6 +24,7 @@ connnectToMongoDB("mongodb://localhost:27017/short-url").then(() => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.get("/test", (req, res)=>{
   return res.end("<h1>Hey for server testing</h1>");
