@@ -14,3 +14,6 @@ async function restrictToLoggedIn(req, res, next) {
     next();
 }
 
+module.exports = {
+    restrictToLoggedIn,
+}
