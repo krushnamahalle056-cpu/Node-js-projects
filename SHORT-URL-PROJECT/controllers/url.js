@@ -15,7 +15,9 @@ async function handleGenerateNewShortURL(req, res){
         redirectURL: req.body.url,
         visitHistory: [],              // show the history of the user who visited the short URL
     });
-    return res.json({ shortId: shortId });
+    return res.render("home", {
+        id: shortId,
+    });
 }
 
 async function handleGetAnalytics(req, res){
