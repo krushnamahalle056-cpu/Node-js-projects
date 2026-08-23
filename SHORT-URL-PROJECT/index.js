@@ -27,17 +27,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.get("/test", async(req, res)=>{
-  const allUrls = await URL.find({});
-  return res.render("home")
-});
 
-app.use("/url", restrictToLoggedInUsersOnly, URLRoutes);
+// app.use("/url", restrictToLoggedInUsersOnly, URLRoutes);
+app.use("/url", URLRoutes);
 app.use("/user", userRoute);
 app.use("/", staticRoute);
 
 
-app.get("/:shortId", async (req, res) => {
+app.get("/url/:shortId", async (req, res) => {
   const shortId = req.params.shortId;
 
   const entry = await URL.findOneAndUpdate(
