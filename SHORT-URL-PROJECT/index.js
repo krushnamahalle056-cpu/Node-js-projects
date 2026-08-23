@@ -28,8 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-// app.use("/url", restrictToLoggedInUsersOnly, URLRoutes);
-app.use("/url", URLRoutes);
+app.use("/url", restrictToLoggedInUsersOnly, URLRoutes);
 app.use("/user", userRoute);
 app.use("/", staticRoute);
 
