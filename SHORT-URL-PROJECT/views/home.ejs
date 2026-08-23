@@ -12,5 +12,15 @@
 </head>
 <body>
     <h1>URL Shortener</h1>
+    <% if (locals.id){ %>
+        <p>Your short URL is: http://localhost:8001/url/<%= id %></p>
+    <% } %>
+    <div>
+        <form action="/url" method="POST">
+            <label for="url">Enter your original URL:</label>
+            <input type="text" placeholder="https://example.com" id="url" name="url" required>
+            <button type="submit">Generate URL</button>
+        </form>
+    </div>
 </body>
 </html>
