@@ -30,7 +30,7 @@ async function handleUserLogin(req, res) {
     // setUser(sessionId , user);  // this line is comment
     // res.cookie('uid', token);
     // return res.redirect("/");   // after creating the user back to the signup page 
-    
+    return res.json({token});
 }
 
 module.exports={
