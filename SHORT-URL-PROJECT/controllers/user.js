@@ -26,11 +26,11 @@ async function handleUserLogin(req, res) {
     
     });
 
-    const token = setUser;
-    setUser(sessionId , user);
-    res.cookie('uid', sessionId);
-
-    return res.redirect("/");   // after creating the user back to the signup page 
+    const token = setUser(user);
+    // setUser(sessionId , user);  // this line is comment
+    // res.cookie('uid', token);
+    // return res.redirect("/");   // after creating the user back to the signup page 
+    
 }
 
 module.exports={
