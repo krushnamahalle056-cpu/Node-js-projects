@@ -11,7 +11,7 @@ router.get("/admin/urls", restrictTo(["ADMIN"]),async (req, res) => {
     });
 });
 
-router.get("/", restrictTo(["USER"]), async (req, res) => {
+router.get("/", restrictTo(["USER","ADMIN"]), async (req, res) => {
     // restrictTo(["USER"]) is a inline middlware
     const allUrls = await URL.find({createdBy:req.user._id});
     return res.render("home", {
