@@ -4,6 +4,13 @@ const { restrictTo } = require("../middlewares/auth");
 
 const router = express.Router();
 
+router.get("/admin/urls", restrictTo(["ADMIN"]),async (req, res) => {
+    const allUrls = await URL.find({});
+    return res.render("home", {
+        urls: allUrls,
+    });
+});
+
 router.get("/", restrictTo(["USER"]), async (req, res) => {
     // restrictTo(["USER"]) is a inline middlware
     const allUrls = await URL.find({createdBy:req.user._id});
