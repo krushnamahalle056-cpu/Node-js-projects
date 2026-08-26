@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const { connnectToMongoDB } = require("./connect");
-const {restrictToLoggedInUsersOnly , checkAuth} = require("./middlewares/auth")
+const {checkForAuthentication , restrictTo} = require("./middlewares/auth")
 
 const URL = require("./models/url");
 
