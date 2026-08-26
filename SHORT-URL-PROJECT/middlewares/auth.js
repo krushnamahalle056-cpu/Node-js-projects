@@ -2,7 +2,7 @@ const {getUser} = require("../service/auth")
 
 async function restrictToLoggedInUsersOnly(req, res, next) {
     const userUid = req.headers['Authorization'];
-
+    console.log(req.headers);
     if (!userUid) {
         return res.redirect("/login");
     }
@@ -21,13 +21,14 @@ async function restrictToLoggedInUsersOnly(req, res, next) {
 
 async function checkAuth(req, res, next) {
     const userUid = req.headers['Authorization'];
+    const token = userUid.split(" Bearer ")[1];
 
     if (!userUid) {
         req.user = null;
         return next();
     }
 
-    const user = await getUser(userUid);
+    const user =  getUser(token);
 
     req.user = user;
     next();
