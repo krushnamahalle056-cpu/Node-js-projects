@@ -20,7 +20,7 @@ async function restrictToLoggedInUsersOnly(req, res, next) {
 
 
 async function checkAuth(req, res, next) {
-    const userUid = req.cookies.uid;
+    const userUid = req.headers['Authorization'];
 
     if (!userUid) {
         req.user = null;
