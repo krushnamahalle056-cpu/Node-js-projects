@@ -1,10 +1,12 @@
 const express = require("express");
 const URL = require("../models/url");
+const { restrictTo } = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.get("/url", async (req, res) => {
-    const allUrls = await URL.find({});
+router.get("/", restrictTo(["USER"]), async (req, res) => {
+    // restrictTo(["USER"]) is a inline middlware
+    const allUrls = await URL.find({createdBy:req.user._id});
     return res.render("home", {
         urls: allUrls,
     });
