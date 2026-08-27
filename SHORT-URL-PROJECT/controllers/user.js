@@ -28,9 +28,9 @@ async function handleUserLogin(req, res) {
 
     const token = setUser(user);
     // setUser(sessionId , user);  // this line is comment
-    // res.cookie('uid', token);
+    res.cookie("token", token);
     // return res.redirect("/");   // after creating the user back to the signup page 
-    return res.json({token});
+    return res.redirect("/");
 }
 
 module.exports={
