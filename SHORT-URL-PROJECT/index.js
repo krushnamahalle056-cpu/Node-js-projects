@@ -59,4 +59,5 @@ app.get("/url/:shortId", async (req, res) => {
 
 app.listen(PORT, () => console.log(`Server Started at PORT =${PORT}`))
 
+ console.log("Server Started at PORT =8001");
  
