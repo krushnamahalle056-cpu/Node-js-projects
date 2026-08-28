@@ -7,3 +7,10 @@ const PORT = 8002;
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
+app.use(express.json());  //middleware
+
+app.get("/" , (req,res)=>{
+    return res.render("homepage");
+});
+
+app.listen(PORT, () => console.log(`Server Started at PORT : 8002`));
