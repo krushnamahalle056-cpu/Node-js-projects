@@ -5,7 +5,18 @@ const multer  = require('multer');
 const app = express();
 const PORT = 8002;
 
-const upload = multer({ dest: 'uploads/' });  // jo bhi file upload hogi use uploads destination folder me store karega
+//  const upload = multer({ dest: 'uploads/' });  // jo bhi file upload hogi use uploads destination folder me store karega
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb){
+        return cb(null, "./uploads");
+    },  //   cb = callback
+    filename: function (req, file, cb) {
+        return cb(null, `${Date.now()}-${file.originalname}`);
+    },
+});
+
+const upload = multer({ storage: storage });
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
