@@ -32,7 +32,7 @@ const userSchema = new Schema({
     {timestamps: true}
 );
 
-userSchema.pre("save", function(next){
+userSchema.pre("save", function(next){   //means: User database mein save hone se pehle ye code chalega
     const user = this;
     
     if(!user.isModified("password")) return;
@@ -46,7 +46,7 @@ userSchema.pre("save", function(next){
     this.password = hashedPassword;
 
     next();
- });
+});
 
 const User = model("User", userSchema);
 
