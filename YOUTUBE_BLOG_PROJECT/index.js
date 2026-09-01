@@ -14,6 +14,8 @@ mongoose.connect("mongodb://localhost:27017/blogify")
 app.set("view engine", "ejs");    // set view engine
 app.set("views" , path.resolve("./views")); // set views directory
 
+app.use(express.urlencoded({extended: true}));  // to parse form data
+
 app.get("/", (req, res) => {
     res.render("home");
 });
