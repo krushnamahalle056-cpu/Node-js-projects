@@ -6,7 +6,7 @@ function createTokenForUser(user){
     const payload = {
         id: user._id,
         email: user.email,
-        ProfilerImageURL: user.profileImageURL,
+        profileImageURL: user.profileImageURL,
         role: user.role,
     }
     const token = JWT.sign(payload, secret);
@@ -16,4 +16,9 @@ function createTokenForUser(user){
 function validateToken(token){
     const payload = JWT.verify(token, secret);
     return payload;
+}
+
+module.exports = {
+    createTokenForUser,
+    validateToken,
 }
