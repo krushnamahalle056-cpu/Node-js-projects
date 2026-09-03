@@ -1,10 +1,13 @@
 const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
 const userRoute = require("./routes/user");
 
 const app = express();
+app.use(cookieParser());
+app.use(checkForAuthenticationCookie("token"));
 const PORT = 3000;
 
 // Connect to MongoDB
