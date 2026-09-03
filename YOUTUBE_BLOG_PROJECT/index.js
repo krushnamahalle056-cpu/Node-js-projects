@@ -20,7 +20,10 @@ app.set("views" , path.resolve("./views")); // set views directory
 app.use(express.urlencoded({extended: true}));  // to parse form data
 
 app.get("/", (req, res) => {
-    res.render("home");
+    res.render("home",{
+        user: req.user,
+        
+    });
 });
 
 app.use("/user", userRoute);
