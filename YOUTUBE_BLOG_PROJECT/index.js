@@ -2,12 +2,11 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 
 const userRoute = require("./routes/user");
 
 const app = express();
-app.use(cookieParser());
-app.use(checkForAuthenticationCookie("token"));
 const PORT = 3000;
 
 // Connect to MongoDB
@@ -18,11 +17,13 @@ app.set("view engine", "ejs");    // set view engine
 app.set("views" , path.resolve("./views")); // set views directory
 
 app.use(express.urlencoded({extended: true}));  // to parse form data
+app.use(cookieParser());
+app.use(checkForAuthenticationCookie("token"));
 
 app.get("/", (req, res) => {
     res.render("home",{
         user: req.user,
-        
+
     });
 });
 
