@@ -24,6 +24,10 @@ router.post("/signin", async (req, res) => {
     }
 });
 
+router.get("/signout", (req, res) => {
+    return res.clearCookie("token").redirect("/");
+});
+
 router.post("/signup", async (req, res) => {
     const { fullName, email, password } = req.body;
 
