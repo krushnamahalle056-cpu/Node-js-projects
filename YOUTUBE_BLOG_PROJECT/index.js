@@ -23,9 +23,10 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));  // to parse form data
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
+app.use(express.static(path.resolve("./public")));
 
-app.get("/", (req, res) => {
-    const allBlogs = Blog.find({});
+app.get("/", async (req, res) => {
+    const allBlogs = await Blog.find({}).sort({ createdAt: -1 }).populate("author").exec();
     res.render("home",{
         user: req.user,
         blogs: allBlogs,
