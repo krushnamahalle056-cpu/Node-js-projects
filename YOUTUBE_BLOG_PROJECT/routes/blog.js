@@ -3,6 +3,7 @@ const multer = require("multer");
 const path = require("path");
 
 const Blog = require("../models/blog");
+const Comment = require("../models/comment");
 const router = Router();
 
 // Set up multer for file uploads
@@ -30,10 +31,21 @@ router.get("/add-new", (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const blog = await Blog.findById(req.params.id).populate("author");
+    console.log(blog);
     return res.render("blog", {
         user: req.user,
         blog: blog
     });
+});
+
+router.post("/comment/:blogId", async (req, res) => {
+    await Comment.create({
+        content: req.body.content,
+        author: req.user._id,
+        blogId: req.params.blogId,
+    });
+
+    return res.redirect(`/blog/${req.params.blogId}`);
 });
 
 router.post("/", upload.single("coverImage"), async (req, res) => {
@@ -42,7 +54,7 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
         title,
         body,
         coverImageURL: `/uploads/${req.file.filename}`,
-        author: req.user.id,
+        author: req.user._id,
     });
 
     return res.redirect("/");
