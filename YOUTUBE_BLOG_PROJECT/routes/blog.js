@@ -31,17 +31,22 @@ router.get("/add-new", (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const blog = await Blog.findById(req.params.id).populate("author");
+    const comments = await Comment.find({ blogId: req.params.id }).populate("author").exec();
     console.log(blog);
+    console.log("comments:", comments);
     return res.render("blog", {
         user: req.user,
-        blog: blog
+        blog: blog,
+        comments: comments
     });
 });
 
 router.post("/comment/:blogId", async (req, res) => {
+    console.log("USER:", req.user);
+
     await Comment.create({
         content: req.body.content,
-        author: req.user._id,
+        author: req.user.id,
         blogId: req.params.blogId,
     });
 
